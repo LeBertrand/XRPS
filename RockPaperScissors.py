@@ -5,8 +5,23 @@ import random
 handBeats = {'r':'s', 'p':'r', 's':'p'}
 hands = list(handBeats.keys())
 
+# Variables determine whether cheats are accepted or treated as invalid input by chooseWinner.
+cheats_unlocked = {'shoot':False}
+
 intro = 'Welcome to Rock, Paper, Scissors. Type q at any time to quit.'
 roundInstr = 'Type r, p or s to play a round of Rock, Paper, Scissors.\nrps> '
+credits = '''Rock, Paper, Scissors coded by Shmuel Jacobs on May 23, for FTI Python club.
+Permission granted to FTI students to use and modify code.
+Thanks for playing.'''
+logo = r'''   ^^^^^^^^^ 
+(***       ***)
+|||  F T I  |||
+|\|         |/|
+\\| ||---|| |//
+ \\ ||---|| //
+  \\       //
+    \\   //
+      ---'''
 
 # Define procedure for letting computer choose one play from a list of options.
 def computerPlay(moveChoices):
@@ -22,6 +37,19 @@ def computerPlay(moveChoices):
 input is player's choice and second input is computer's. Return 1 for player wins,
 0 for tie, -1 for computer wins.'''
 def chooseWinner(playerChoice, computerChoice):
+
+	if( playerChoice == 'Time to load up.'):
+		print('Go ahead. Make my day. You lose this one punk.')
+		cheats_unlocked['shoot'] = True
+		return -1
+
+	# Cheat options inserted here. Main gameplay logic begins by checking if input in hands.
+
+	if( playerChoice == 'shoot' and cheats_unlocked['shoot']):
+		return 1
+
+
+
 
 	if( playerChoice not in hands ):
 		# invalid choice -- return error code -2
@@ -86,3 +114,5 @@ while(userIn not in ['q', 'Q', 'quit', 'Quit']):
 # Now back outside the loop.
 print('Thanks for playing.')
 showStandings(ComputerScore=computerWins, playerScore=playerWins)
+print(credits)
+print(logo)
