@@ -6,7 +6,7 @@ handBeats = {'r':'s', 'p':'r', 's':'p'}
 hands = list(handBeats.keys())
 
 # Variables determine whether cheats are accepted or treated as invalid input by chooseWinner.
-cheats_unlocked = {'shoot':False}
+cheats_unlocked = {'shoot':False, 'clint':False}
 
 intro = 'Welcome to Rock, Paper, Scissors. Type q at any time to quit.'
 roundInstr = 'Type r, p or s to play a round of Rock, Paper, Scissors.\nrps> '
@@ -22,6 +22,10 @@ logo = r'''   ^^^^^^^^^
   \\       //
     \\   //
       ---'''
+
+clint_quotes = set(['Go ahead, make my day', 'Do you feel lucky punk?',
+	'make it four coffins', 'my mule don\'like getting scared'])
+
 
 # Define procedure for letting computer choose one play from a list of options.
 def computerPlay(moveChoices):
@@ -86,6 +90,8 @@ computerWins = 0
 while(userIn not in ['q', 'Q', 'quit', 'Quit']):
 
 	computerIn = computerPlay( hands )
+
+	# Check for cheats. Return code may change userIn.
 
 	winner = chooseWinner(userIn, computerIn) # I put the arguments in the right order.
 	'''winner is just a variable holding 1, 0 or -1. Meaningless unless you read
